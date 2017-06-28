@@ -1,5 +1,3 @@
-#Applicationヘルパーをテストするファイル
-
 require 'test_helper'
 class AppllicationHelperTest < ActionView::TestCase
   #app/helpers/application_helper.rbにfull_titleヘルパーに対する単体テスト
