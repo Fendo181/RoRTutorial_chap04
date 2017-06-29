@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_save{email.downcase!} 
+  before_save{email.downcase!}
 
   validates :name, presence:true
   validates :email, presence:true
@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :email, presence:true, length: { maximum:255},
             format:{ with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive:false}
+  has_secure_password
 end
