@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: "Example user",email: "user@example.com",password: "foobar", password_confirmation: "foobar")
+    @user = User.new(name: "Example user", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -37,7 +37,7 @@ class UserTest < ActiveSupport::TestCase
                          first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
       @user.email = valid_address
-      assert @user.valid?,"#{valid_address.inspect} should be vaild"
+      assert @user.valid?, "#{valid_address.inspect} should be vaild"
     end
   end
 
@@ -47,7 +47,7 @@ class UserTest < ActiveSupport::TestCase
                           foo@bar_baz.com foo@bar+baz.com foo@bar..com]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
-      assert_not @user.valid?,"#{invalid_address.inspect} should be invalid"
+      assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
   end
 
