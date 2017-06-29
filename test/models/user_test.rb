@@ -8,18 +8,17 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(name:"Example user",email:"user@example.com")
   end
 
-  # trueであれば成功
   test "should be valid" do
     assert @user.valid?
   end
 
-  #nameが空なら無効としたい = 無効(false)で成功ならassert_notメソッドを使う。
+  #nameが空なら無効とする拒否テスト
   test "name should be present" do
-    @user.name = " 　"
+    @user.name = "  "
     assert_not @user.valid?
   end
 
-  #emailが空なら無効としたい = 無効(flase)で成功ならassert_notメソッドを使う。
+  #emailが空なら無効とする拒否テスト
   test "email should be present" do
     @user.email = "  "
     assert_not @user.valid?
@@ -35,7 +34,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  #有効なメールフォーマットかどうかを確認するテスト
+  #有効なメールフォーマットの確認テスト
   test "email validation should accept valid addresses" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
@@ -45,7 +44,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  #無効なメールフォーマットをテストする。
+  #無効なメールフォーマットの拒否テスト
   test "email validation should reject invalid addresses" do
     invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
                           foo@bar_baz.com foo@bar+baz.com foo@bar..com]
@@ -54,4 +53,14 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?,"#{invalid_address.inspect} should be invalid"
     end
   end
+
+  #重複するメールアドレスの拒否テスト
+  test "email addresses should be unique" do
+    duplicate_user = @user.dup
+    #大文字を区別しないでテストする。
+    duplicate_user.email = @user.email.upcase
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
 end
