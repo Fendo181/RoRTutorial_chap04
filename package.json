@@ -1,5 +1,7 @@
 {
   "name": "rails_chap04",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^1.9.1"
+  }
 }
