@@ -18,7 +18,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
   #fixtureのデータを使ったユーザログイン/ログアウトのテスト
-  test "login with valid information" do
+  test 'login with valid information' do
     get login_path
     post login_path, params: { session: { email:    @user.email,
                                           password: 'password' } }
