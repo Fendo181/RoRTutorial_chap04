@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
-  test "invaild signup information" do
+  test 'invaild signup information' do
     get signup_path
     # 投稿失敗が成功するかを確認するテスト
     assert_no_difference 'User.count' do
@@ -16,7 +16,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'form[action="/signup"]'
   end
 
-  test "valid signup information" do
+  test 'valid signup information' do
     get signup_path
     assert_difference 'User.count', 1 do
       post users_path, params: { user: {  name: "Example User",
@@ -26,6 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
-    assert_not flash.empty
+    assert_not flash.empty?
+    assert is_logged_in?
   end
 end
