@@ -17,7 +17,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
-  #ユーザログインのテスト
+  #fixtureのデータを使ったユーザログインのテスト
   test "login with valid information" do
     get login_path
     post login_path, params: { session: { email:    @user.email,
