@@ -11,15 +11,24 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  #ユーザーを永続的セッションに記憶する
+    # 記憶トークンcookieに対応するユーザーを返す
+    def current_user
+       #現在ログイン中のユーザを返す(いる場合)
+      if (user_id = session[:user_id])
+        @current_user ||= User.find_by(id: user_id)
+      elsif (user_id = cookies.signed[:user_id])
+        user = User.find_by(id: user_id)
+        if user && user.authenticated?(cookies[:remember_token])
+          log_in user
+          @current_user = user
+        end
+      end
+    end
+
+  #現在のユーザでログアウトする。
   def log_out
     session.delete(:user_id)
     @current_user = nil
-  end
-
-  #現在ログイン中のユーザを返す(いる場合)
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
   end
 
   #ユーザがログインしていればtrue、その他ならfalseを返す。
