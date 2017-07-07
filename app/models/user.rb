@@ -32,4 +32,9 @@ class User < ApplicationRecord
     #記憶ダイジェストを更新
     update_attribute(:remember_digest, User.digest(remember_token))
   end
+
+  #渡されたトークンがダイジェストとい一致したらtrueを返す。
+  def authenticated?(remember_token)
+    BCrypy::Password.new(remember_digest).is_password?(remember_token)
+  end
 end
