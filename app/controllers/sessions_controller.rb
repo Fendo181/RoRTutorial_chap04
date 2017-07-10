@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
       if user && user.authenticate(params[:session][:password])
         #ユーザログイン後にユーザ情報にリダイレクトする。
         log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_to user
       else
         flash.now[:danger] = "Invalid email/password combination"
@@ -15,7 +16,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    #logged_in?がされている場合のみlog_outする。
+    log_out if logged_in?
     redirect_to root_url
   end
 end
