@@ -44,7 +44,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not_empty cookies['remember_token']
   end
 
-  test "login without remembering" do
+  test 'login without remembering' do
     # クッキーを保存してログイン
     log_in_as(@user, remember_me: '1')
     delete logout_path
