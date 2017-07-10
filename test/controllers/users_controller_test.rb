@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should redirect edit whrn logged in as wrong user' do
     #archerでログインする。
-    log_in_as(@other_user)
+    log_in_as(@other_users)
     #なぜかmichaelのページをいじる。
     get edit_user_path(@user)
     assert flash.empty?
@@ -15,7 +15,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should redirect edit when logged in as wrong user' do
-    log_in_as(@other_user)
+    log_in_as(@other_users)
     patch user_path(@user), params: { user: { name: @user.name,
                                               email: @user.email } }
     assert flash.empty?
