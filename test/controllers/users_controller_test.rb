@@ -11,6 +11,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  #adminの属性の変更が禁止されている事をテストする。
+  test 'should not allow the admin attribute to be edited via the web' do
+    log_in_as(@other_users)
+    assert_not @other_users.admin?
+    #adminの属性を変更する。
+    patch user_path(@other_users), params: {
+                                  user: { password: @other_users.password,
+                                          password_confirmation: @other_users.password,
+                                          admin: true
+                                        }
+    }
+    #データベースを更新して確認する。
+    #@other_users.reload.admin?でfalseが返ってくるという事は変更されてない事を意味する。
+    assert_not @other_users.reload.admin?
+  end
+
   test 'should redirect edit whrn logged in as wrong user' do
     #archerでログインする。
     log_in_as(@other_users)
