@@ -52,13 +52,13 @@ module SessionsHelper
   #記憶したURL (もしくはデフォルト値) にリダイレクト
   def redirect_back_or(default)
     #なかったらdefaultへ飛ぶ。
-    redirect_to(session[:forwading_url] || default)
+    redirect_to(session[:forwarding_url] || default)
     session.delete(:forwading_ur)
   end
 
   #アクセスしようとしたURLを覚えておく。
   def store_location
-    session[:forwading_url] = request.original_url if request.get?
+    session[:forwarding_url] = request.original_url if request.get?
   end
 
 end
