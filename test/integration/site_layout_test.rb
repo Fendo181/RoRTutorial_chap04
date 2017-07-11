@@ -36,14 +36,11 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
   #ログイン済みでないユーザ
   test 'not login success layout lnks' do
-    #ログインページへ飛ぶ。
     get login_path
     assert_select "a[href=?]", login_path
     assert_select 'a[href=?]', help_path
     assert_select 'a[href=?]', about_path
-    #sign up
     assert_select 'a[href=?]', signup_path
-    
   end
 
 end
