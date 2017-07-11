@@ -5,6 +5,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_users = users(:archer)
   end
 
+  #ログインしてない状態でindexアクションにアクセスするとリダイレクトするを確認するテスト
+  test 'should redirect index when not logged in' do
+    get users_path
+    assert_redirected_to login_url
+  end
+
   test 'should redirect edit whrn logged in as wrong user' do
     #archerでログインする。
     log_in_as(@other_users)
