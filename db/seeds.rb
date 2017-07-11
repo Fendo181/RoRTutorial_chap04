@@ -1,13 +1,16 @@
+# Admin1 User
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
-             password_confirmation: "foobar")
+             password_confirmation: "foobar",
+             admin: true)
 
-# Endu user
+# Admin2 User
 User.create!(name:  "endu",
             email: "endu@email.com",
             password:              "kmkm1201",
-            password_confirmation: "kmkm1201")
+            password_confirmation: "kmkm1201",
+            admin: true)
 
 
 
