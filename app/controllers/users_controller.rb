@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :corrct_user, only: [:edit, :update]
 
   def index
+    @user = User.all
   end
 
   def show
