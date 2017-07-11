@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #:onlyオプション (ハッシュ) を渡すことで、:editと:updateアクションだけ適用させる。
-  before_action :logged_in_user, only: [:index, :edit, :update]
-  before_action :corrct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
   def index
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     end
 
     #正しいユーザかどうか確認する。
-    def corrct_user
+    def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end

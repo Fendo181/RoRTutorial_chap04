@@ -27,7 +27,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not @other_user.reload.admin?
   end
 
-  test 'should redirect edit whrn logged in as wrong user' do
+  test 'should redirect edit when logged in as wrong user' do
     #archerでログインする。
     log_in_as(@other_user)
     #なぜかmichaelのページをいじる。
@@ -36,7 +36,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test 'should redirect edit when logged in as wrong user' do
+  test 'should redirect update when logged in as wrong user' do
     log_in_as(@other_user)
     patch user_path(@user), params: { user: { name: @user.name,
                                               email: @user.email } }
