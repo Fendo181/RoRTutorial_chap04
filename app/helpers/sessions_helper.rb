@@ -53,7 +53,7 @@ module SessionsHelper
   def redirect_back_or(default)
     #なかったらdefaultへ飛ぶ。
     redirect_to(session[:forwarding_url] || default)
-    session.delete(:forwading_ur)
+    session.delete(:forwading_url)
   end
 
   #アクセスしようとしたURLを覚えておく。
