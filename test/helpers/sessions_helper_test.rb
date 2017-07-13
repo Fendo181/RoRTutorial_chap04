@@ -1,6 +1,8 @@
 require 'test_helper'
+require 'minitest/mock'
 
 class SessionsHelperTest < ActionView::TestCase
+
   def setup
     @user = users(:michael)
     remember(@user)
@@ -15,4 +17,14 @@ class SessionsHelperTest < ActionView::TestCase
     @user.update_attribute(:remember_digest, User.digest(User.new_token))
     assert_nil current_user
   end
+
+  test 'redirect_back_or session delete succes' do
+    session[:forwading_url] = "example.com"
+    redirect_back_or @user
+    assert_nil session[:forwading_url]
+  end
+
+  private
+    def redirect_to(default)
+    end
 end
