@@ -57,8 +57,6 @@ class UsersController < ApplicationController
                                    )
     end
 
-    #bedfore アクション
-
     #ログイン済みユーザかどうか確認
     def logged_in_user
       unless logged_in?
@@ -69,7 +67,7 @@ class UsersController < ApplicationController
       end
     end
 
-    #正しいユーザかどうか確認する。
+    #正しいユーザかどうか確認
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)

@@ -5,13 +5,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:archer)
   end
 
-  #ログインしてない状態でindexアクションにアクセスするとリダイレクトするを確認するテスト
+  #ログインしてない状態でindexアクションにアクセスするとリダイレクトする確認するテスト
   test 'should redirect index when not logged in' do
     get users_path
     assert_redirected_to login_url
   end
 
-  #adminの属性の変更が禁止されている事をテストする。
+  #adminの属性の変更が禁止されている事をテスト
   test 'should not allow the admin attribute to be edited via the web' do
     log_in_as(@other_user)
     assert_not @other_user.admin?
@@ -30,7 +30,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should redirect edit when logged in as wrong user' do
     #archerでログインする。
     log_in_as(@other_user)
-    #なぜかmichaelのページをいじる。
     get edit_user_path(@user)
     assert flash.empty?
     assert_redirected_to root_url
