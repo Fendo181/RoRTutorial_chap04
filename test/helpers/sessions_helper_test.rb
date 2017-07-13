@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'minitest/mock'
 
 class SessionsHelperTest < ActionView::TestCase
 
@@ -18,10 +17,10 @@ class SessionsHelperTest < ActionView::TestCase
     assert_nil current_user
   end
 
-  test 'redirect_back_or session delete succes' do
+  test 'redirect_back_or session delete success' do
     session[:forwading_url] = "example.com"
     redirect_back_or @user
-    assert_nil session[:forwading_url]
+    assert_nil session[:forwarding_url]
   end
 
   private
