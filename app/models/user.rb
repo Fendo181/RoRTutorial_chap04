@@ -44,6 +44,7 @@ class User < ApplicationRecord
       email.downcase!
     end
 
+    #有効トークンとそれに対応するダイジェスト
     def create_activation_digest
       self.activation_token = User.new_token
       self.activation_digest = User.digest(activation_token)
