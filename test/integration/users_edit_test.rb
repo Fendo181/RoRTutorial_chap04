@@ -15,7 +15,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                       email: "foo@invaild",
                                       password: "foo",
                                       password_confirmation: "bar" } }
-    #失敗して正常にeditページへリダイレクトする。
+    #失敗して正常にeditページへリダイレクトする
     assert_template 'users/edit'
     assert_select "div.alert", 'The form contains 4 errors'
   end
@@ -34,7 +34,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                               password_confirmation: "" } }
     assert_not flash.empty?
     assert_redirected_to @user
-    #データベースから最新のユーザー情報を読み込み直して、正しく更新されたかどうかを確認する。
+    #データベースから最新のユーザー情報を読み込み直して、正しく更新されたかどうかを確認する
     @user.reload
     assert_equal name, @user.name
     assert_equal email, @user.email

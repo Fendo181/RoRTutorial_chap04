@@ -54,7 +54,7 @@ class UserTest < ActiveSupport::TestCase
   #重複するメールアドレスの拒否テスト
   test "email addresses should be unique" do
     duplicate_user = @user.dup
-    #大文字を区別しないでテストする。
+    #大文字を区別しないでテストする
     duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
@@ -81,6 +81,6 @@ class UserTest < ActiveSupport::TestCase
 
   #authenticated?にnilが来た場合の拒否テスト
   test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 end

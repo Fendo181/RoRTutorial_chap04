@@ -18,7 +18,7 @@ class UserIndexTest < ActionDispatch::IntegrationTest
          assert_select 'a[href=?]', user_path(user), text: 'delete'
        end
      end
-     #ユーザが消去されたかを確認する。
+     #ユーザが消去されたかを確認する
      assert_difference 'User.count', -1 do
        delete user_path(@non_admin)
      end
