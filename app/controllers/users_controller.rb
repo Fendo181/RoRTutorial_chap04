@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     #ログイン済みユーザかどうか確認
     def logged_in_user
       unless logged_in?
-        #もともとログインしたかったurlをここで保存する。
+        #もともとログインしたかったurlをここで保存する
         store_location
         flash[:danger] = "Please log in."
         redirect_to login_url

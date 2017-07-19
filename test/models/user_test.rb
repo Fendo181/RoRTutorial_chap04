@@ -54,7 +54,7 @@ class UserTest < ActiveSupport::TestCase
   #重複するメールアドレスの拒否テスト
   test "email addresses should be unique" do
     duplicate_user = @user.dup
-    #大文字を区別しないでテストする。
+    #大文字を区別しないでテストする
     duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
