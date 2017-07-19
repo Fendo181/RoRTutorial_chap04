@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    #logged_in?がされている場合のみlog_outする。
+    #logged_in?がされている場合のみlog_outする
     log_out if logged_in?
     redirect_to root_url
   end

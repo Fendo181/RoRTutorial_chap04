@@ -10,19 +10,19 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  # 渡された文字列のハッシュ値を渡す。
+  # 渡された文字列のハッシュ値を渡す
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST:
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string,cost: cost)
   end
 
-  #ランダムなトークンを渡す。
+  #ランダムなトークンを渡す
   def User.new_token
     SecureRandom.urlsafe_base64
   end
 
-  #永続セッションのためにユーザーをデータベースに記憶する。
+  #永続セッションのためにユーザーをデータベースに記憶する
   def remember
     #記憶トークンを作成
     self.remember_token = User.new_token
@@ -40,12 +40,12 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  #アカウントを有効化させる。
+  #アカウントを有効化させる
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
-  #有効化用のメールを送信する。
+  #有効化用のメールを送信する
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
   end
