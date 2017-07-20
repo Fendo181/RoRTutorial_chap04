@@ -10,13 +10,9 @@ class UsersController < ApplicationController
 
   def show
      @user = User.find(params[:id])
-     data = { id: @user.id,
-              name: @user.name,
-              email: @user.email,
-            }
      respond_to do |format|
        format.html { redirect_to root_url and return unless @user.activated? }
-       format.json { render json: data }
+       format.json
      end
    end
 
