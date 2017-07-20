@@ -58,6 +58,8 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert is_logged_in?
     assert_not flash.empty?
     assert_redirected_to user
+    #passwordrestが成功後に'reset_digest'がnillになるか確認する。
+    assert_nil user.reload['reset_digest']
   end
 
   test 'expired token' do
