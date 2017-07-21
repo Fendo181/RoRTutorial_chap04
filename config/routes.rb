@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   #ユーザ情報を取得するだけのJSON API用のエンドポインを追加
   scope :api, format: 'json' do
+    #認証JSON API様ののエンドポイント(/api/auth)を作成する。
+    post '/auth', to: 'auth#login_api'
     resources :users
   end
 end
