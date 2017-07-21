@@ -9,9 +9,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    redirect_to root_url and return unless @user.activated?
-  end
+     @user = User.find(params[:id])
+     respond_to do |format|
+       format.html { redirect_to root_url and return unless @user.activated? }
+       format.json
+     end
+   end
 
   def new
     @user = User.new

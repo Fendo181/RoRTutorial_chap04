@@ -12,4 +12,9 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
+
+  #ユーザ情報を取得するだけのJSON API用のエンドポインを追加
+  scope :api, format: 'json' do
+    resources :users
+  end
 end
